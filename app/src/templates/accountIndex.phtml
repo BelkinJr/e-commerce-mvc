@@ -1,0 +1,26 @@
+<?php include "header.phtml" ?>
+<!---------- Body starts --------------->
+<h1>Welcome</h1>
+The accounts are:
+<table>
+    <?php foreach ($accounts as $account) { ?>
+    <tr>
+        <td><?= $account->getId() ?></td>
+        <td><?= $account->getName() ?></td>
+        <td><a href= <?= $linkTo('accountDelete', ['id' => $account->getId()]);?> >delete</a></td>
+        <td><a href= <?= $linkTo('updateRedirect', ['id' => $account->getId()]);?> >update</a></td>
+    </tr>
+    <?php } ?>
+</table>
+    <br>
+    <br>
+    Create new account.
+<br>
+<?php if (!empty($missing)) {echo $missing . '<br>'; } ?>
+<form action=<?= $linkTo('accountCreate')?> method="post">
+    <input type="text" placeholder="enter name" name="name">
+    <input type="submit" value="create">
+</form>
+<br>
+<!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>

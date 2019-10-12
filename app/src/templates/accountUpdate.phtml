@@ -1,0 +1,12 @@
+<?php include "header.phtml" ?>
+    <!---------- Body starts --------------->
+    Please type a new name of the account <?= $name ?> . <br>
+    <a href=<?= $linkTo('accountIndex'); ?>>Back</a>
+    <br>
+    <form action=<?= $linkTo('accountUpdate', ['id' =>  $id])?> method="post">
+        <?php if (!empty($missing)) {echo $missing . '<br>'; } ?>
+        <input type="text" placeholder="enter name" name="name">
+        <input type="submit" value="update">
+    </form>
+    <!---------- Body ends -------------------->
+<?php include "footer.phtml" ?>
