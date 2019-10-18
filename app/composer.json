@@ -18,7 +18,7 @@
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "vbelkin\\a2\\": "src/"
+      "vbelkin\\a3\\": "src/"
     }
   }
 }

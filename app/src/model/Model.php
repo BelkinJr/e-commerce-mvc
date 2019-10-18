@@ -63,7 +63,7 @@ class Model
                                           username varchar(256) UNIQUE,
                                           email varchar (256) UNIQUE ,
                                           password varchar (256),
-                                          PRIMARY KEY (`id`);"
+                                          PRIMARY KEY (`id`) );"
             );
 
             if (!$result) {
@@ -72,7 +72,7 @@ class Model
             }
 
             if (!$this->db->query(
-                "INSERT INTO `user` VALUES (NULL,'Tim Taylor', 'TheToolman', 'tim.taylor@gmail.com', 'TheToolman');"
+                "INSERT INTO `account` VALUES (NULL,'Tim Taylor', 'TheToolman', 'tim.taylor@gmail.com', 'TheToolman');"
             )) {
                 // handle appropriately
                 error_log("Failed creating sample data!", 0);
