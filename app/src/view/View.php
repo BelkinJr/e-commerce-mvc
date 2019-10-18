@@ -6,16 +6,16 @@
  * Time: 4:38 PM
  */
 
-namespace vbelkin\a2\view;
+namespace vbelkin\a3\view;
 
-use const vbelkin\a2\APP_ROOT;
+use const vbelkin\a3\APP_ROOT;
 /**
  * Class View
  *
  * A wrapper for the view templates.
  * Limits the accessible scope available to phtml templates.
  *
- * @package vbelkin
+ * @package vbelkin/a3
  * @author  Vitaly Belkin <belkin.jr.nvk@gmail.com>
  */
 class View

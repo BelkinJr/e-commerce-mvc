@@ -1,11 +1,11 @@
 <?php
 
-namespace vbelkin\a2\controller;
+namespace vbelkin\a3\controller;
 
 /**
  * Class Controller
  *
- * @package veblkin/a2
+ * @package veblkin/a3
  * @author  Vitaly Belkin <belkin.jr.nvk@gmail.com>
  */
 class Controller

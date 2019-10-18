@@ -2,16 +2,16 @@
 /**
  * 159.339 Internet Programming 2019.2
  * Student ID: 17385402
- * Assignment: 2   Date: 12/10/19
+ * Assignment: 3   Date: 12/10/19
  * System: PHP 7.3
  * Code guidelines: PSR-1, PSR-12
  *
  * FRONT CONTROLLER - Responsible for URL routing and User Authentication
  *
- * @package vbelkin/a2
+ * @package vbelkin/a3
  * @author  V. Belkin <bekin.jr.nvk@gmail.com>
  **/
-namespace vbelkin\a2;
+namespace vbelkin\a3;
 date_default_timezone_set('Pacific/Auckland');
 const APP_ROOT = __DIR__;
 

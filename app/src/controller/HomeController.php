@@ -1,10 +1,10 @@
 <?php
-namespace vbelkin\a2\controller;
+namespace vbelkin\a3\controller;
 
 /**
  * Class HomeController
  *
- * @package vbelkin
+ * @package vbelkin/a3
  * @author  Vitaly Belkin <belkin.jr.nvk@gmail.com>
  */
 class HomeController extends Controller

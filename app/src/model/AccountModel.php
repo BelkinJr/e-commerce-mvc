@@ -1,10 +1,10 @@
 <?php
-namespace vbelkin\a2\model;
+namespace vbelkin\a3\model;
 
 /**
  * Class AccountModel
  *
- * @package vbelkin
+ * @package vbelkin/a3
  * @author  Vitaly Belkin <belkin.jr.nvk@gmail.com>
  */
 class AccountModel extends Model

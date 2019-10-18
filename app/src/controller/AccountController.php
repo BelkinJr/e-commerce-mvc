@@ -1,13 +1,13 @@
 <?php
-namespace vbelkin\a2\controller;
+namespace vbelkin\a3\controller;
 
-use vbelkin\a2\model\{AccountModel, AccountCollectionModel};
-use vbelkin\a2\view\View;
+use vbelkin\a3\model\{AccountModel, AccountCollectionModel};
+use vbelkin\a3\view\View;
 
 /**
  * Class AccountController
  *
- * @package vbelkin
+ * @package vbelkin/a3
  * @author  Vitaly Belkin <belkin.jr.nvk@gmail.com>
  */
 class AccountController extends Controller
