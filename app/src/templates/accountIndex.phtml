@@ -1,26 +1,26 @@
 <?php include "header.phtml" ?>
 <!---------- Body starts --------------->
-<h1>Welcome</h1>
-The accounts are:
-<table>
-    <?php foreach ($accounts as $account) { ?>
-    <tr>
-        <td><?= $account->getId() ?></td>
-        <td><?= $account->getName() ?></td>
-        <td><a href= <?= $linkTo('accountDelete', ['id' => $account->getId()]);?> >delete</a></td>
-        <td><a href= <?= $linkTo('updateRedirect', ['id' => $account->getId()]);?> >update</a></td>
-    </tr>
-    <?php } ?>
-</table>
-    <br>
-    <br>
-    Create new account.
-<br>
-<?php if (!empty($missing)) {echo $missing . '<br>'; } ?>
-<form action=<?= $linkTo('accountCreate')?> method="post">
-    <input type="text" placeholder="enter name" name="name">
-    <input type="submit" value="create">
-</form>
-<br>
+    <head>
+    </head>
+    <body>
+    <h2>Login Form</h2>
+    <form action=<?= $linkTo('accountLogin')?> method="post">
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <button type="submit">Login</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+        </div>
+        <div class="container" style="background-color:#f1f1f1">
+            <span class="psw">First time here? <a href=<?= $linkTo('createRedirect'); ?>>Register</a></span>
+        </div>
+    </form>
+    </body>
 <!---------- Body ends -------------------->
 <?php include "footer.phtml" ?>

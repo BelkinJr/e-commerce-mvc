@@ -14,6 +14,7 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
+        session_start();
         $this->redirect('accountIndex');
     }
 }

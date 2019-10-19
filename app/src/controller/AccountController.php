@@ -17,10 +17,9 @@ class AccountController extends Controller
      */
     public function indexAction()
     {
-        $collection = new AccountCollectionModel();
-        $accounts = $collection->getAccounts();
+        session_start();
         $view = new View('accountIndex');
-        echo $view->addData('accounts', $accounts)->render();
+        echo $view->render();
     }
     /**
      * Account Create action
@@ -28,6 +27,7 @@ class AccountController extends Controller
      */
     public function createAction()
     {
+        session_start();
         if (!empty($_POST["name"]))
         {
             $name = $_POST["name"];
@@ -47,12 +47,25 @@ class AccountController extends Controller
     }
 
     /**
+     * Account Create Redirect action
+     *
+     *redirects to the account creation page
+     */
+    public function createRedirect()
+    {
+        session_start();
+        $view = new View('accountCreation');
+        echo $view->render();
+    }
+
+    /**
      * Account Delete action
      *
      * @param int $id Account id to be deleted
      */
     public function deleteAction($id)
     {
+        session_start();
         $account = (new AccountModel())->load($id);
         $account->delete();
         $name = $account ->getName();
@@ -66,7 +79,7 @@ class AccountController extends Controller
      */
     public function updateAction($id)
     {
-
+        session_start();
         $account = (new AccountModel())->load($id);
         if (!empty($_POST["name"])) {
             $name = $_POST["name"];
@@ -92,11 +105,18 @@ class AccountController extends Controller
      */
     public function updateRedirect($id)
     {
+        session_start();
         $account = (new AccountModel())->load($id);
         $name = $account ->getName();
         $view = new View('accountUpdate');
         $view->addData('id', $id);
         echo $view->addData('name', $name)->render();
+    }
+
+    public function loginAction()
+    {
+
+
     }
 
 
