@@ -17,6 +17,18 @@ class AccountModel extends Model
      * @var string Account Name
      */
     private $name;
+    /**
+     * @var string Account Username
+     */
+    private $username;
+    /**
+     * @var string Account email
+     */
+    private $email;
+    /**
+     * @var string Account Password
+     */
+    private $password;
 
 
     /**
@@ -25,6 +37,30 @@ class AccountModel extends Model
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return int Account Username
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return int Account Email
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return int Account Password
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     /**
@@ -43,6 +79,39 @@ class AccountModel extends Model
     public function setName(string $name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @param string $email
+     * @return $this AccountModel
+     */
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @param string $username
+     * @return $this AccountModel
+     */
+    public function setUsername(string $username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @param string $password
+     * @return $this AccountModel
+     */
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
 
         return $this;
     }
@@ -75,10 +144,16 @@ class AccountModel extends Model
     public function save()
     {
         $name = $this->name ?? "NULL";
+        $username = $this->username ?? "NULL";
+        $email = $this->email ?? "NULL";
+        $password = $this->password ?? "NULL";
+
+
         if (!isset($this->id)) {
             // New account - Perform INSERT
             try {
-                if (!$result = $this->db->query("INSERT INTO `account` VALUES (NULL,'$name');")) {
+                if (!$result = $this->db->query("INSERT INTO `account` VALUES (NULL,'$name','$username','$email',
+                            '$password');")) {
                     // throw new ...
                     throw new connectionException("cannot connect to the database", 0, null);
                 }
@@ -102,6 +177,23 @@ class AccountModel extends Model
 
         return $this;
     }
+
+    /**
+     * Checks if username exists in the database
+     *
+     * @return bool
+     */
+    public function checkUsername()
+    {
+        $sql_u = "SELECT * FROM users WHERE username='$this->username'";
+        $res_u = mysqli_query($this->db, $sql_u);
+        if (mysqli_num_rows($res_u) > 0)
+        {
+            return false;
+        } else return true;
+    }
+
+
 
     /**
      * Deletes account from the database

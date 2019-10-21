@@ -73,19 +73,7 @@ $collection->attachRoute(
 
 $collection->attachRoute(
     new Route(
-        '/account/create/',
-        array(
-            '_controller' => 'vbelkin\a3\controller\AccountController::createRedirect',
-            'methods' => 'GET',
-            'name' => 'createRedirect'
-        )
-    )
-);
-
-
-$collection->attachRoute(
-    new Route(
-        '/account/create/',
+        '/account/login/',
         array(
             '_controller' => 'vbelkin\a3\controller\AccountController::loginAction',
             'methods' => 'GET',

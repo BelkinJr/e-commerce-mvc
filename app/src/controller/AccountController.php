@@ -3,6 +3,7 @@ namespace vbelkin\a3\controller;
 
 use vbelkin\a3\model\{AccountModel, AccountCollectionModel};
 use vbelkin\a3\view\View;
+use vbelkin\a3\helpers\Helpers;
 
 /**
  * Class AccountController
@@ -28,21 +29,46 @@ class AccountController extends Controller
     public function createAction()
     {
         session_start();
-        if (!empty($_POST["name"]))
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             $name = $_POST["name"];
-            $account = new AccountModel();
-            $account->setName($name); // will come from Form data
-            $account->save();
-            $id = $account->getId();
-            $view = new View('accountCreated');
-            echo $view->addData('name', $name)->render();
+            $username = $_POST["username"];
+            $email = $_POST["email"];
+            $password = $_POST["psw"];
+            $password2 = $_POST["psw-repeat"];
+
+            if (!Helpers::usernameCheck($username))
+            {
+                $view = new View('accountCreation');
+                $view->addData('missing', "username can only have alphanumeric characters");
+                echo $view->render();
+            }
+            elseif (!Helpers::passCheck($password))
+            {
+                $view = new View('accountCreation');
+                $view->addData('missing', "password has to have one lowercase letter, one uppercase letter, one number and no special characters, 7-15 symbols");
+                echo $view->render();
+            }
+            elseif (!Helpers::passMatch($password,$password2))
+            {
+                $view = new View('accountCreation');
+                $view->addData('missing', "passwords do not match");
+                echo $view->render();
+            }
+            else
+            {
+                $account = new AccountModel();
+                $account->setName($name); // will come from Form data
+                $account->setEmail($email);
+                $account->setUsername($username);
+                $account->setPassword($password);
+                $account->save();
+                //PLACEHOLDER AIGHT
+            }
         } else {
-            $view = new View('accountIndex');
-            $collection = new AccountCollectionModel();
-            $accounts = $collection->getAccounts();
-            $view->addData('accounts', $accounts);
-            echo $view->addData('missing', "account name can't be empty")->render();
+            $view = new View('accountCreation');
+            echo $view->render();
         }
     }
 
@@ -53,9 +79,7 @@ class AccountController extends Controller
      */
     public function createRedirect()
     {
-        session_start();
-        $view = new View('accountCreation');
-        echo $view->render();
+
     }
 
     /**
