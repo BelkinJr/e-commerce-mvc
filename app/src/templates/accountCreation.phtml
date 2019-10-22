@@ -7,8 +7,9 @@
 
 
         function checkAvailability() {
+            console.log("hi");
             $.ajax({
-                 url: "../../src/controller/AccountController::ifUsernameFree",
+                 url: "http://localhost:8000/account/jquery/",
                  data:'username='+$("#username").val(),
                  type: "POST",
                 success: function(data) {
@@ -20,7 +21,7 @@
             //
              });
 
-            console.log("hi")
+
         }
     </script>
 

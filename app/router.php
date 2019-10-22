@@ -82,6 +82,17 @@ $collection->attachRoute(
     )
 );
 
+$collection->attachRoute(
+    new Route(
+        '/account/jquery/',
+        array(
+            '_controller' => 'vbelkin\a3\controller\AccountController::ifUsernameFree',
+            'methods' => 'POST',
+            'name' => 'usernameCheck'
+        )
+    )
+);
+
 $router = new Router($collection);
 $router->setBasePath('/');
 return $router;

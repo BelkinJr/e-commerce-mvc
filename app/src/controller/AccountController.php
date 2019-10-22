@@ -79,8 +79,9 @@ class AccountController extends Controller
      */
     public function ifUsernameFree($username)
     {
-        $account = new AccountModel();
-        return $account->checkUsername($username);
+//        $account = new AccountModel();
+//        return $account->checkUsername($username);
+        echo 'qwert';
     }
 
     /**
