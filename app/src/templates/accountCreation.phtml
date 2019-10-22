@@ -1,6 +1,28 @@
 <?php include "header.phtml" ?>
 <!---------- Body starts --------------->
 <head>
+    <script src="../../js/jquery-3.4.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+
+
+        function checkAvailability() {
+            $.ajax({
+                 url: "../../src/controller/AccountController::ifUsernameFree",
+                 data:'username='+$("#username").val(),
+                 type: "POST",
+                success: function(data) {
+                console.log(data)
+                }
+            //     if ((data)){
+            //         $("#user-availability-status").addClass("userFree");
+            //     } else {$("#user-availability-status").addClass("userBusy");}
+            //
+             });
+
+            console.log("hi")
+        }
+    </script>
 
 </head>
 <body>
@@ -18,8 +40,13 @@
         <input type="text" placeholder="Enter Name" name="name" required>
         <br>
 
-        <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required>
+        <div id="frmCheckUsername">
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required  onClick="checkAvailability()">
+            <span id="user-availability-status" class="userFree userBusy">
+              <b>available</b>
+          	</span>
+        </div>
         <br>
 
         <label for="email"><b>Email</b></label>

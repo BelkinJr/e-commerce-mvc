@@ -73,13 +73,14 @@ class AccountController extends Controller
     }
 
     /**
-     * Account Create Redirect action
      *
-     *redirects to the account creation page
+     * @param $username
+     * @return bool
      */
-    public function createRedirect()
+    public function ifUsernameFree($username)
     {
-
+        $account = new AccountModel();
+        return $account->checkUsername($username);
     }
 
     /**
@@ -142,6 +143,4 @@ class AccountController extends Controller
 
 
     }
-
-
 }

@@ -181,11 +181,12 @@ class AccountModel extends Model
     /**
      * Checks if username exists in the database
      *
+     * @param $username
      * @return bool
      */
-    public function checkUsername()
+    public function checkUsername($username)
     {
-        $sql_u = "SELECT * FROM users WHERE username='$this->username'";
+        $sql_u = "SELECT * FROM users WHERE username='$username'";
         $res_u = mysqli_query($this->db, $sql_u);
         if (mysqli_num_rows($res_u) > 0)
         {
