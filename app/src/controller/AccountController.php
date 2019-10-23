@@ -64,7 +64,7 @@ class AccountController extends Controller
                 $account->setUsername($username);
                 $account->setPassword($password);
                 $account->save();
-                //PLACEHOLDER AIGHT
+                //PLACEHOLDER
             }
         } else {
             $view = new View('accountCreation');
@@ -74,14 +74,16 @@ class AccountController extends Controller
 
     /**
      *
-     * @param $username
-     * @return bool
+     * Checks 
+     *
      */
-    public function ifUsernameFree($username)
+    public function ifUsernameFree()
     {
-//        $account = new AccountModel();
-//        return $account->checkUsername($username);
-        echo 'qwert';
+        $username = $_POST["username"];
+        $account = new AccountModel();
+        $response = $account->checkUsername($username);
+        $jsonresponse = json_encode($response);
+        echo $jsonresponse;
     }
 
     /**

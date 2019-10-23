@@ -1,27 +1,28 @@
 <?php include "header.phtml" ?>
 <!---------- Body starts --------------->
 <head>
-    <script src="../../js/jquery-3.4.1.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-
-
         function checkAvailability() {
-            console.log("hi");
             $.ajax({
-                 url: "http://localhost:8000/account/jquery/",
-                 data:'username='+$("#username").val(),
-                 type: "POST",
+                type: "POST",
+                url: "/account/jquery/",
+                dataType: "json",
+                data:'username='+$("#username").val(),
                 success: function(data) {
-                console.log(data)
+                    console.log(data);
+                    if (data == 1){
+                        $("#user-availability-status").addClass("userBusy");
+                       $("#user-availability-status").removeClass("userFree");
+
+                    } else {
+                        $("#user-availability-status").addClass("userFree");
+
+                        $("#user-availability-status").removeClass("userBusy");
+                        }
                 }
-            //     if ((data)){
-            //         $("#user-availability-status").addClass("userFree");
-            //     } else {$("#user-availability-status").addClass("userBusy");}
-            //
              });
-
-
         }
     </script>
 
@@ -43,7 +44,7 @@
 
         <div id="frmCheckUsername">
             <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required  onClick="checkAvailability()">
+            <input type="text" id="username" placeholder="Enter Username" name="username" required  onkeyup="checkAvailability()">
             <span id="user-availability-status" class="userFree userBusy">
               <b>available</b>
           	</span>

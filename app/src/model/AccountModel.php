@@ -186,12 +186,15 @@ class AccountModel extends Model
      */
     public function checkUsername($username)
     {
-        $sql_u = "SELECT * FROM users WHERE username='$username'";
-        $res_u = mysqli_query($this->db, $sql_u);
+////        $sql_u = "SELECT * FROM account WHERE username='$username'";
+////        $res_u = mysqli_query($this->db, $sql_u);
+        $res_u = $this->db->query("SELECT * FROM account WHERE username='$username'");
+
         if (mysqli_num_rows($res_u) > 0)
         {
-            return false;
-        } else return true;
+            return 1;
+        } else return 0;
+
     }
 
 
