@@ -147,13 +147,14 @@ class AccountModel extends Model
         $username = $this->username ?? "NULL";
         $email = $this->email ?? "NULL";
         $password = $this->password ?? "NULL";
+        $hash = hash('sha512',$password);
 
 
         if (!isset($this->id)) {
             // New account - Perform INSERT
             try {
                 if (!$result = $this->db->query("INSERT INTO `account` VALUES (NULL,'$name','$username','$email',
-                            '$password');")) {
+                            '$hash');")) {
                     // throw new ...
                     throw new connectionException("cannot connect to the database", 0, null);
                 }
@@ -186,36 +187,34 @@ class AccountModel extends Model
      */
     public function checkUsername($username)
     {
-////        $sql_u = "SELECT * FROM account WHERE username='$username'";
-////        $res_u = mysqli_query($this->db, $sql_u);
         $res_u = $this->db->query("SELECT * FROM account WHERE username='$username'");
 
         if (mysqli_num_rows($res_u) > 0)
         {
             return 1;
         } else return 0;
-
     }
-
-
 
     /**
-     * Deletes account from the database
+     * Attempt at login
+     * checking if user has entered information correctly
      *
-     * @return $this AccountModel
+     * @param $username
+     * @param $password
+     * @return bool
      */
-    public function delete()
+    public function loginAttempt($username, $password)
     {
-        try {
-            if (!$result = $this->db->query("DELETE FROM `account` WHERE `account`.`id` = $this->id;")) {
-                //throw new ...
-                throw new connectionException("cannot connect to the database", 0, null);
-            }
 
-            return $this;
-        }
-        catch (connectionException $e) {
-            echo $e->displayError();
-        }
+        $hash = hash('sha512',$password);
+       $result = $this->db->query("SELECT * FROM account WHERE username='$username' AND password= '$hash'");
+
+
+
+
+        if (mysqli_num_rows($result) > 0) {
+            return true;
+        } else {return false;}
     }
+
 }

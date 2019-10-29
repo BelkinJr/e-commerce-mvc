@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 body {
     background-color: lightgrey;
-}
+    font-family: 'Roboto', sans-serif;}
+
+
+li:last-child { float:right; }
 
 #user-availability-status.userBusy {
     color: red;
@@ -10,3 +14,12 @@ body {
 #user-availability-status.userFree{
     color: green;
 }
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+    pointer-events: none;
+}
+

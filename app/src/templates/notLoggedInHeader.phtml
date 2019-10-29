@@ -11,26 +11,8 @@
     <link rel="stylesheet" type="text/css" href="/static/styles/site.css">
 </head>
 <body>
- <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-     <a href=<?=$linkTo('Home'); ?> class="navbar-brand">Toolshed Inc.</a>
-     <a class="nav-link text-white">  Hello, <?= $username ?></a>
-     <ul class="navbar-nav">
-         <div class="container">
-             <div class="dropdown">
-                 <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     Category
-                 </button>
-                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                     <a class="dropdown-item" href="#">Placeholder</a>
-                     <a class="dropdown-item" href="#">Placeholder</a>
-                     <a class="dropdown-item" href="#">Placeholder</a>
-                 </div>
-             </div>
-         </div>
-         <li class="nav-item">
-             <a class="nav-link" href=<?= $linkTo('Logout'); ?>>logout</a>
-         </li>
-     </ul>
- </nav>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed top">
+    <a href=<?=$linkTo('Home'); ?> class="navbar-brand">Toolshed Inc.</a>
+</nav>
 </body>
 <!---------- Header ends --------------->

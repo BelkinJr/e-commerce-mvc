@@ -71,8 +71,13 @@ class Model
                 error_log("Failed creating table account", 0);
             }
 
+            //create and hash the password to store it safely in the database
+            $password = 'TheToolman';
+            $hash = hash('sha512',$password);
+
+
             if (!$this->db->query(
-                "INSERT INTO `account` VALUES (NULL,'Tim Taylor', 'TheToolman', 'tim.taylor@gmail.com', 'TheToolman');"
+                "INSERT INTO `account` VALUES (NULL,'Tim Taylor', 'TheToolman', 'tim.taylor@gmail.com', '$hash');"
             )) {
                 // handle appropriately
                 error_log("Failed creating sample data!", 0);
@@ -80,31 +85,31 @@ class Model
         }
         //----------------------------------------------------------------------------
         //******************category table***************************
-//        $result = $this->db->query("SHOW TABLES LIKE 'category';");
-//
-//        if ($result->num_rows == 0) {
-//            // table doesn't exist
-//            // create it and populate with sample data
-//
-//            $result = $this->db->query(
-//                "CREATE TABLE `category` (
-//                                          name varchar(256) NOT NULL UNIQUE,
-//                                          PRIMARY KEY (name) );"
-//            );
-//
-//            if (!$result) {
-//                // handle appropriately
-//                error_log("Failed creating table category", 0);
-//            }
-//
-//            if (!$this->db->query(
-//                "INSERT INTO `category` VALUES ('Hammers'), ('Screwdrivers'), ('Cutting Tools'), ('Tool Boxes');"
-//            )) {
-//                // handle appropriately
-//                error_log("Failed creating sample data!", 0);
-//            }
-//        }
-//        //******************item table***************************
+        $result = $this->db->query("SHOW TABLES LIKE 'category';");
+
+        if ($result->num_rows == 0) {
+            // table doesn't exist
+            // create it and populate with sample data
+
+            $result = $this->db->query(
+                "CREATE TABLE `category` (
+                                          name varchar(256) NOT NULL UNIQUE,
+                                          PRIMARY KEY (name) );"
+            );
+
+            if (!$result) {
+                // handle appropriately
+                error_log("Failed creating table category", 0);
+            }
+
+            if (!$this->db->query(
+                "INSERT INTO `category` VALUES ('Hammers'), ('Screwdrivers'), ('Cutting Tools'), ('Tool Boxes');"
+            )) {
+                // handle appropriately
+                error_log("Failed creating sample data!", 0);
+            }
+        }
+////        //******************item table***************************
 //        $result = $this->db->query("SHOW TABLES LIKE 'item';");
 //
 //        if ($result->num_rows == 0) {

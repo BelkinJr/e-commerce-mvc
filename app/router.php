@@ -21,7 +21,7 @@ $collection->attachRoute(
         '/account/',
         array(
         '_controller' => 'vbelkin\a3\controller\AccountController::indexAction',
-        'methods' => 'GET',
+        'methods' => ['GET','POST'],
         'name' => 'accountIndex'
         )
     )
@@ -38,35 +38,14 @@ $collection->attachRoute(
     )
 );
 
-$collection->attachRoute(
-    new Route(
-        '/account/delete/:id',
-        array(
-        '_controller' => 'vbelkin\a3\controller\AccountController::deleteAction',
-        'methods' => 'GET',
-        'name' => 'accountDelete'
-        )
-    )
-);
 
 $collection->attachRoute(
     new Route(
-        '/account/update/:id',
+        '/account/logout',
         array(
-        '_controller' => 'vbelkin\a3\controller\AccountController::updateAction',
-        'methods' => 'POST',
-        'name' => 'accountUpdate'
-        )
-    )
-);
-
-$collection->attachRoute(
-    new Route(
-        '/account/update/:id',
-        array(
-            '_controller' => 'vbelkin\a3\controller\AccountController::updateRedirect',
+            '_controller' => 'vbelkin\a3\controller\AccountController::accountLogout',
             'methods' => 'GET',
-            'name' => 'updateRedirect'
+            'name' => 'Logout'
         )
     )
 );

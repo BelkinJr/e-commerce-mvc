@@ -19,9 +19,35 @@ class AccountController extends Controller
     public function indexAction()
     {
         session_start();
-        $view = new View('accountIndex');
-        echo $view->render();
+        if (!isset($_SESSION['username'])) {
+            if (!empty($_POST)) {
+                if (isset($_POST["uname"]) && isset($_POST["psw"])) {
+                    $username = $_POST["uname"];
+                    $password = $_POST["psw"];
+                    $account = new AccountModel();
+                    if (!$account->loginAttempt($username,$password)) {
+                        $view = new View('accountIndex');
+                        $view->addData('missing', "make sure your details are correct");
+                        echo $view->render();
+                    } else {
+                        $_SESSION['username'] = $username;
+                        $view = new View('homePage');
+                        $view->addData('username', $username);
+                        echo $view->render();
+                    }
+                }
+
+            } else {
+                $view = new View('accountIndex');
+                echo $view->render();
+            }
+        } else {
+            $view = new View('homePage');
+            $view->addData('username', $_SESSION['username']);
+            echo $view->render();
+        }
     }
+
     /**
      * Account Create action
      * creates the account if the form is not empty
@@ -64,7 +90,11 @@ class AccountController extends Controller
                 $account->setUsername($username);
                 $account->setPassword($password);
                 $account->save();
-                //PLACEHOLDER
+
+                $_SESSION['username'] = $username;
+                $view = new View('homePage');
+                $view->addData('username', $username);
+                echo $view->render();
             }
         } else {
             $view = new View('accountCreation');
@@ -74,8 +104,8 @@ class AccountController extends Controller
 
     /**
      *
-     * Checks 
-     *
+     * Checks if username is free
+     * sends response to ajax
      */
     public function ifUsernameFree()
     {
@@ -86,64 +116,17 @@ class AccountController extends Controller
         echo $jsonresponse;
     }
 
-    /**
-     * Account Delete action
-     *
-     * @param int $id Account id to be deleted
-     */
-    public function deleteAction($id)
-    {
-        session_start();
-        $account = (new AccountModel())->load($id);
-        $account->delete();
-        $name = $account ->getName();
-        $view = new View('accountDeleted');
-        echo $view->addData('name', $name)->render();
-    }
-    /**
-     * Account Update action
-     *
-     * @param int $id Account id to be updated
-     */
-    public function updateAction($id)
-    {
-        session_start();
-        $account = (new AccountModel())->load($id);
-        if (!empty($_POST["name"])) {
-            $name = $_POST["name"];
-            $account->setName($name)->save(); // new name will come from Form data
-            $view = new View('updateSuccess');
-            $view->addData('id', $id);
-            $view->addData('name', $name);
-            echo $view->render();
-        } else {
-            $name = $account->getName();
-            $view = new View('accountUpdate');
-            $view->addData('id', $id);
-            $view->addData('missing', "account name can't be empty");
-            echo $view->addData('name', $name)->render();
-        }
-
-    }
 
     /**
-     * Account Update Redirect action
+     * Destroys session
+     * and takes user to the index page
      *
-     * @param $id
      */
-    public function updateRedirect($id)
-    {
+    public function accountLogout(){
         session_start();
-        $account = (new AccountModel())->load($id);
-        $name = $account ->getName();
-        $view = new View('accountUpdate');
-        $view->addData('id', $id);
-        echo $view->addData('name', $name)->render();
-    }
-
-    public function loginAction()
-    {
-
-
+        session_unset();
+        session_destroy();
+        $view = new View('accountIndex');
+        echo $view->render();
     }
 }

@@ -1,26 +1,56 @@
-<?php include "header.phtml" ?>
+<!-- Latest compiled and minified CSS -->
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">-->
+<?php include "notLoggedInHeader.phtml" ?>
 <!---------- Body starts --------------->
-    <head>
+<style type="text/css">
+    .login-form {
+        width: 340px;
+        margin: 50px auto;
+    }
+    .login-form form {
+        margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .btn {
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+ <head>
     </head>
     <body>
-    <h2>Login Form</h2>
-    <form action=<?= $linkTo('accountLogin')?> method="post">
-        <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
 
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
-        <div class="container" style="background-color:#f1f1f1">
+        <div class="login-form">
+                <br>
+                <form action=<?= $linkTo('accountIndex')?> method="post">
+
+
+
+                    <h2 class="text-center">Log in</h2>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username" name="uname" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" name="psw" required="required">
+                    </div>
+                    <div class="text-center">
+                    <?php if (!empty($missing)) {echo $missing . '<br>'; } ?>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark btn-block">Log in</button>
+                    </div>
+                </form>
+            </div>
+        <div class="container text-center" >
             <span class="psw">First time here? <a href=<?= $linkTo('accountCreate'); ?>>Register</a></span>
         </div>
-    </form>
+
     </body>
 <!---------- Body ends -------------------->
 <?php include "footer.phtml" ?>
